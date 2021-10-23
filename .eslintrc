@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "google"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "require-jsdoc": "off",
+    "max-len": [2, 200]
+  },
+  "env": {
+    "es6": true
+  }
+}
