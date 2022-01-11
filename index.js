@@ -181,7 +181,10 @@ const main = async (username, password) => {
 
         const grades = reportCardsHtml.querySelectorAll(".studentGradingBottomRight #tableHeaderTable tbody > tr:not(:first-child)").map((row) => {
             const grade = row.querySelectorAll("td").map((cell) => {
-                return cell.textContent;
+                return {
+                    grade: cell.textContent,
+                    assignments: cell.getAttribute("cellkey")
+                }
             })
             return grade
         })
@@ -198,7 +201,8 @@ const main = async (username, password) => {
                     grades: grades.map((collumn, idx) => {
                         return {
                             gradingCollumn: gradingCollumns[idx],
-                            score: grades[courseIdx][idx]
+                            score: grades[courseIdx][idx]["grade"],
+                            assignments: grades[courseIdx][idx]["assignments"]
                         }
                     })
                 }
@@ -210,8 +214,22 @@ const main = async (username, password) => {
         console.log(chalk.greenBright("Exported to reportCards.json"));
 }
 
-read({ prompt: chalk.bold.blueBright('🔒 Username: '), silent: false }, (er, username) => {
-    read({ prompt: chalk.bold.blueBright('🔒 Password: '), silent: true }, (er, password) => {
-        main(username, password)
-    })
-})
+const usernameCallback = (er, username) => {
+    if(yargs.argv.password) {
+        passwordCallback(er, { username, password: yargs.argv.password })
+    } else {
+        read({ prompt: chalk.bold.blueBright('🔒 Password: '), silent: true }, (er, password) => {
+            passwordCallback(er, { username, password })
+        }) 
+    }
+}
+
+const passwordCallback = (er, { username, password }) => {
+    main(username, password)
+}
+
+if(yargs.argv.username) {
+    usernameCallback(undefined, yargs.argv.username)
+} else {
+    read({ prompt: chalk.bold.blueBright('🔒 Username: '), silent: false }, usernameCallback)
+}
