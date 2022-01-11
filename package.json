@@ -1,33 +1,19 @@
 {
-  "name": "frontlineplus",
-  "version": "0.1.0",
-  "description": "Chrome extension for Frontline",
+  "name": "frontline-plus-node-test",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack --config webpack/webpack.dev.js --watch",
-    "build": "webpack --config webpack/webpack.prod.js",
-    "clean": "rm -rf dist"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "eslint": "^8.1.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
-  },
-  "devDependencies": {
-    "@types/chrome": "0.0.158",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@typescript-eslint/parser": "^5.1.0",
-    "copy-webpack-plugin": "^9.0.1",
-    "css-loader": "^6.4.0",
-    "eslint-config-google": "^0.14.0",
-    "glob": "^7.1.6",
-    "style-loader": "^3.3.1",
-    "ts-loader": "^9.2.6",
-    "typescript": "^4.4.3 ",
-    "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0",
-    "webpack-merge": "^5.0.0"
+    "axios": "^0.24.0",
+    "chalk": "^4.1.2",
+    "node-html-parser": "^5.2.0",
+    "read": "^1.0.7",
+    "yargs": "^17.3.1"
   }
 }
