@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "nodemonConfig": { "ignore": ["reportCards.json"] },
+  "nodemonConfig": {
+    "ignore": [
+      "reportCards.json"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,6 +18,8 @@
     "axios": "^0.24.0",
     "chalk": "^4.1.2",
     "node-html-parser": "^5.2.0",
+    "qs": "^6.10.3",
+    "qs-iconv": "^1.0.4",
     "read": "^1.0.7",
     "yargs": "^17.3.1"
   }

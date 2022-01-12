@@ -4,6 +4,8 @@ const fs = require("fs")
 const { parse } = require("node-html-parser")
 const yargs = require("yargs")
 const chalk = require("chalk")
+const qs = require("qs")
+const win1252 = require("qs-iconv").encoder("win1252")
 
 const generateHeaders = (cookie, host, origin, referer) => {
     return {
@@ -71,10 +73,12 @@ const createSignOn = (parentUrl, username, password, sessionCookie) => {
             data.append("userLoginId", username)
             data.append("userPassword", password)
         
+        const headers = generateHeaders(sessionCookie, host, origin, referer)
+
         updateReferer(fullURL, params)
 
         axios.post(fullURL, data, {
-            headers: generateHeaders(sessionCookie, host, origin, referer)
+            headers
         }).then(response => {
             resolve(response)
         }).catch(error => {
@@ -111,8 +115,36 @@ const fetchReportCards = (parentUrl, sessionCookie) => {
         const params = {"x-tab-id": "undefined"}
         const { origin, host } = new URL(parentUrl)
 
+        const headers = generateHeaders(sessionCookie, host, origin, referer)
+
+        updateReferer(fullURL, params)
+
         axios.post(fullURL, null, {
-            headers: generateHeaders(sessionCookie, host, origin, referer)
+            headers
+        }).then(response => {
+            resolve(response)
+        }).then(error => {
+            reject(error)
+        })
+
+    })
+}
+
+const fetchAssignments = (parentUrl, courseData, sessionCookie) => {
+    return new Promise((resolve, reject) => {
+        const fullURL = parentUrl + 'PSSViewGradeBookEntriesAction.do'
+        const params = {"x-tab-id": "undefined"}
+        const { origin, host } = new URL(parentUrl)
+
+        const data = `${ generateDefaultBody().toString() }&gradeBookKey=${ courseData }&replaceObjectParam1=&selectedCell=&selectedTdId=`
+        // cant use URLSearchParams because of weird formatting of courseData
+
+        const headers = generateHeaders(sessionCookie, host, origin, referer)
+
+        updateReferer(fullURL, params)
+
+        axios.post(fullURL, data, {
+            headers
         }).then(response => {
             resolve(response)
         }).then(error => {
@@ -183,14 +215,13 @@ const main = async (username, password) => {
             const grade = row.querySelectorAll("td").map((cell) => {
                 return {
                     grade: cell.textContent,
-                    assignments: cell.getAttribute("cellkey")
+                    assignments: qs.stringify({'': cell.getAttribute("cellkey")}, {encoder: win1252}).replaceAll("%20", "+").substr(1)
                 }
             })
             return grade
         })
 
-        const json = JSON.stringify(
-            courses.map((course, courseIdx) => {
+        const json = courses.map((course, courseIdx) => {
                 return {
                     course: course.map((collumn, idx) => {
                         return {
@@ -207,11 +238,16 @@ const main = async (username, password) => {
                     })
                 }
             })
-        , null, 4);
 
-        fs.writeFileSync('reportCards.json', json)
+        fs.writeFileSync('reportCards.json', JSON.stringify(json, null, 4))
 
         console.log(chalk.greenBright("Exported to reportCards.json"));
+
+        console.log("Fetching grades of first class ...");
+        
+        fetchAssignments(generalParentURL, json[0]["grades"][0]["assignments"], entryPoint.sessionCookie).then((response) => {
+            fs.writeFileSync("assignments.html", response.data)
+        })
 }
 
 const usernameCallback = (er, username) => {
