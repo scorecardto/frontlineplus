@@ -153,6 +153,10 @@ const fetchAssignments = (parentUrl, courseData, sessionCookie) => {
     })
 }
 
+const createJSONReportCards = () => {
+
+}
+
 const main = async (username, password) => {
     if(!yargs.argv.generalParentURL) {
         console.log(chalk.redBright("Missing --generalParentURL in argument list."));
@@ -188,20 +192,21 @@ const main = async (username, password) => {
             .querySelector(".studentGradingTopLeft tr")
             ?.querySelectorAll("td")
             .filter((td) => {
-                return td.innerText.length > 0
+                return td.rawText.length > 0
             })
             .map((td) => {
-                return td.innerText
+                console.log(td.rawText);
+                return td.rawText
             }) ?? []
 
         const gradingCollumns = reportCardsHtml
             .querySelector(".studentGradingTopRight tr")
             ?.querySelectorAll("td")
             .filter((td) => {
-                return td.innerText.length > 0
+                return td.innerText.replace(/&nbsp;/g, '').length > 0
             })
             .map((td) => {
-                return td.innerText
+                return td.innerText.replace(/&nbsp;/g, '')
             }) ?? []
         
         const courses = reportCardsHtml.querySelectorAll(".studentGradingBottomLeft #tableHeaderTable tbody > tr:not(:first-child)").map((row) => {
@@ -221,33 +226,33 @@ const main = async (username, password) => {
             return grade
         })
 
-        const json = courses.map((course, courseIdx) => {
-                return {
-                    course: course.map((collumn, idx) => {
-                        return {
-                            key: courseCollumns[idx],
-                            value: collumn
-                        }
-                    }),
-                    grades: grades.map((collumn, idx) => {
-                        return {
-                            gradingCollumn: gradingCollumns[idx],
-                            score: grades[courseIdx][idx]["grade"],
-                            assignments: grades[courseIdx][idx]["assignments"]
-                        }
-                    })
-                }
-            })
+        // const json = courses.map((course, courseIdx) => {
+        //         return {
+        //             course: course.map((collumn, idx) => {
+        //                 return {
+        //                     key: courseCollumns[idx],
+        //                     value: collumn
+        //                 }
+        //             }),
+        //             grades: grades.map((collumn, idx) => {
+        //                 return {
+        //                     gradingCollumn: gradingCollumns[idx],
+        //                     score: grades[courseIdx][idx]["grade"],
+        //                     assignments: grades[courseIdx][idx]["assignments"]
+        //                 }
+        //             })
+        //         }
+        //     })
 
-        fs.writeFileSync('reportCards.json', JSON.stringify(json, null, 4))
+        // fs.writeFileSync('reportCards.json', JSON.stringify(json, null, 4))
 
-        console.log(chalk.greenBright("Exported to reportCards.json"));
+        // console.log(chalk.greenBright("Exported to reportCards.json"));
 
-        console.log("Fetching grades of first class ...");
+        // console.log("Fetching grades of first class ...");
         
-        fetchAssignments(generalParentURL, json[0]["grades"][0]["assignments"], entryPoint.sessionCookie).then((response) => {
-            fs.writeFileSync("assignments.html", response.data)
-        })
+        // fetchAssignments(generalParentURL, json[0]["grades"][0]["assignments"], entryPoint.sessionCookie).then((response) => {
+        //     fs.writeFileSync("assignments.html", response.data)
+        // })
 }
 
 const usernameCallback = (er, username) => {

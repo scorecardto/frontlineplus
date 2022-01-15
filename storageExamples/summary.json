@@ -1,0 +1,38 @@
+{
+    "collumns": {
+        "__course-name": {
+            "name": "Course Name",
+            "icon": "course-book"
+        }, "teacher": {
+            "name": "Teacher",
+            "icon": "person"
+        }, "course-code": {
+            "name": "Course Code",
+            "icon": "ellipsis"
+        }, "__grade": {
+            "name": "Grade",
+            "icon": "numbers"
+        }
+    }, "courses": {
+        "aaaaaa": {
+            "__course-name": "AP Calculus AB",
+            "teacher": "John Doe",
+            "course-code": "AP CALC AB",
+            "__grade": 99
+        },
+        "bbbbbb": {
+            "__course-name": "AP Calculus BC",
+            "teacher": "Jane Doe",
+            "course-code": "AP CALC BC",
+            "__grade": 85
+        }
+    }, "sortBy": {
+        "col": "__grade",
+        "order": "asc"
+    },
+    "view": "list",
+    "appearance": {
+        "background": "auto",
+        "accent": "blue"
+    }
+}
