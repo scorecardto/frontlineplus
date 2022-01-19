@@ -226,27 +226,27 @@ const main = async (username, password) => {
             return grade
         })
 
-        // const json = courses.map((course, courseIdx) => {
-        //         return {
-        //             course: course.map((collumn, idx) => {
-        //                 return {
-        //                     key: courseCollumns[idx],
-        //                     value: collumn
-        //                 }
-        //             }),
-        //             grades: grades.map((collumn, idx) => {
-        //                 return {
-        //                     gradingCollumn: gradingCollumns[idx],
-        //                     score: grades[courseIdx][idx]["grade"],
-        //                     assignments: grades[courseIdx][idx]["assignments"]
-        //                 }
-        //             })
-        //         }
-        //     })
+        const json = courses.map((course, courseIdx) => {
+                return {
+                    course: course.map((collumn, idx) => {
+                        return {
+                            key: courseCollumns[idx],
+                            value: collumn
+                        }
+                    }),
+                    grades: grades.map((collumn, idx) => {
+                        return {
+                            gradingCollumn: gradingCollumns[idx],
+                            score: grades[courseIdx][idx]["grade"],
+                            assignments: grades[courseIdx][idx]["assignments"]
+                        }
+                    })
+                }
+            })
 
-        // fs.writeFileSync('reportCards.json', JSON.stringify(json, null, 4))
+        fs.writeFileSync('reportCards.json', JSON.stringify(json, null, 4))
 
-        // console.log(chalk.greenBright("Exported to reportCards.json"));
+        console.log(chalk.greenBright("Exported to reportCards.json"));
 
         // console.log("Fetching grades of first class ...");
         
