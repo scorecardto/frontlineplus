@@ -1,26 +1,30 @@
 {
-  "name": "frontline-plus-node-test",
+  "name": "frontlineplus",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "reportCards.json"
-    ]
-  },
+  "description": "This program is a concept for an automatic grade checker using NodeJS.",
+  "private": true,
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.24.0",
-    "chalk": "^4.1.2",
+    "axios": "^0.25.0",
+    "buffer": "^6.0.3",
+    "colors": "^1.4.0",
+    "iconv-lite": "^0.6.3",
+    "node": "^17.3.1",
     "node-html-parser": "^5.2.0",
     "qs": "^6.10.3",
-    "qs-iconv": "^1.0.4",
     "read": "^1.0.7",
+    "string_decoder": "^1.3.0",
     "yargs": "^17.3.1"
-  }
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.7",
+    "@types/read": "^0.0.29",
+    "@types/yargs": "^17.0.8",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5"
+  },
+  "main": "index.js"
 }

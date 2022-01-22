@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "commonJS",
+    "moduleResolution": "node",
+    "target": "es6",
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "outDir": "dist",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "pretty": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "./node_modules/@types/**/*.d.ts",
+    "./src/**/*.ts"
+  ]
+}
