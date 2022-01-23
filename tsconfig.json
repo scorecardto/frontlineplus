@@ -1,14 +1,47 @@
 {
   "compilerOptions": {
-      "strict": true,
-      "module": "ES2020",
-      "target": "es6",
-      "esModuleInterop": true,
-      "sourceMap": false,
-      "rootDir": "src",
-      "outDir": "dist/js",
-      "noEmitOnError": true,
-      "jsx": "react",
-      "typeRoots": [ "node_modules/@types" ]
+    /* Basic */
+    "lib": [
+      "ES2020"
+    ],
+    "target": "ES2020",
+    "module": "CommonJS",
+    "skipLibCheck": true,
+    /* Compiling */
+    "inlineSourceMap": false,
+    "declaration": false,
+    "allowJs": true,
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    /* Strict Options */
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowUnusedLabels": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "importsNotUsedAsValues": "error",
+    /* Types */
+    "types": [
+      "node"
+    ],
+    "forceConsistentCasingInFileNames": true,
+    /* Module Resolution */
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
   },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./node_modules"
+  ]
 }

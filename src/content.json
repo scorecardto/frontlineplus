@@ -1,0 +1,86 @@
+{
+  "AP World History": {
+    "teacher": "Kimberley Pettigrew",
+    "courseCode": "H.0000.XXX",
+    "grades": {
+      "1Nin": {
+        "average": 95,
+        "sections": [
+          {
+            "name": "In Class Assignments",
+            "average": 100,
+            "weight": 20.0,
+            "assignments": [
+              {
+                "name": "Week 1",
+                "grade": 100
+              },
+              {
+                "name": "Week 2",
+                "grade": 100
+              }
+            ]
+          }
+        ]
+      },
+      "2Nin": {
+        "average": 93,
+        "sections": [
+          { 
+            "name": "Quizzes",
+            "average": 100,
+            "weight": 20.0,
+            "assignments": [
+              {
+                "name": "DAQ 10",
+                "grade": 91.6
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "Advanced Computer Science": {
+    "teacher": "James Shockey",
+    "courseCode": "H.0000.XXX",
+    "grades": {
+      "1Nin": {
+        "average": 100,
+        "sections": [
+          {
+            "name": "Coursework",
+            "average": 100,
+            "weight": 100.0,
+            "assignments": [
+              {
+                "name": "Stacks Playposit",
+                "grade": 100
+              },
+              {
+                "name": "Queue Playposit",
+                "grade": 100
+              }
+            ]
+          }
+        ]
+      },
+      "2Nin": {
+        "average": 91.6,
+        "sections": [
+          {
+            "name": "Coursework",
+            "average": 100,
+            "weight": 100.0,
+            "assignments": [
+              {
+                "name": "Stacks Quiz",
+                "grade": 91.6
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

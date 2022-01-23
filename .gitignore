@@ -1,5 +1,6 @@
-npm-debug.log
-node_modules/
-dist/
-tmp/
+.yarn
+node_modules
 .DS_Store
+Grades.xlsx
+dist
+~*
